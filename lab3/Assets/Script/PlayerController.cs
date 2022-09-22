@@ -60,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     private void TryJumping()
     {
-        if (!_isGrounded) return;
+        if (!_isGrounded && coyoteCount <= 0f) return;
 
         Jump(jumpForce);
     }
