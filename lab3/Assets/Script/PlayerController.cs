@@ -16,34 +16,40 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerAnimatorController animatorController;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private CollectibleType playerColor;
+    [SerializeField] private float coyoteTime = 0.15f;
+    [SerializeField] private float coyoteCount;
 
-    [Header("Ground Check")]
-    [SerializeField] private LayerMask groundLayers;
+    [Header("Ground Check")] [SerializeField]
+    private LayerMask groundLayers;
+
     [SerializeField] private float groundCheckDistance = 0.01f;
 
     private bool _isGrounded;
+
     private void Update()
     {
         CheckGround();
         SetAnimatorParameters();
+        CheckCoyotetime();
     }
 
     void FixedUpdate()
     {
         rb.velocity = new Vector2(moveInput * speed, rb.velocity.y);
     }
-    
+
     private void OnMove(InputValue value)
     {
         moveInput = value.Get<float>();
         FlipPlayerSprite();
     }
 
-    private void Jump(float value)
+    public void Jump(float value)
     {
         //Debug.Log($"{value} is pressed");
-            rb.velocity = new Vector2(rb.velocity.x, 0f);
-            rb.AddForce(transform.up * value, ForceMode2D.Impulse);
+        rb.velocity = new Vector2(rb.velocity.x, 0f);
+        rb.AddForce(transform.up * value, ForceMode2D.Impulse);
+        coyoteCount = 0f;
     }
 
     private void OnJump(InputValue value)
@@ -51,11 +57,23 @@ public class PlayerController : MonoBehaviour
         if (!value.isPressed) return;
         TryJumping();
     }
+
     private void TryJumping()
     {
         if (!_isGrounded) return;
-        
+
         Jump(jumpForce);
+    }
+    private void CheckCoyotetime()
+    {
+        if (_isGrounded)
+        {
+            coyoteCount = coyoteTime;
+        }
+        else
+        {
+            coyoteCount -= Time.deltaTime;
+        }
     }
     private void FlipPlayerSprite()
     {
@@ -68,13 +86,16 @@ public class PlayerController : MonoBehaviour
             transform.localScale = Vector3.one;
         }
     }
-
+    private void TakeDamage()
+    {
+        GameManager.instance.ProcessPlayerDeath();
+    }
     private void CheckGround()
     {
         var playerBounds = playerCollider.bounds;
-        
-        RaycastHit2D raycastHit = Physics2D.BoxCast(playerBounds.center, playerBounds.size, 
-            0f , Vector2.down, groundCheckDistance, groundLayers);
+
+        RaycastHit2D raycastHit = Physics2D.BoxCast(playerBounds.center, playerBounds.size,
+            0f, Vector2.down, groundCheckDistance, groundLayers);
         _isGrounded = raycastHit.collider != null;
     }
 
@@ -82,7 +103,8 @@ public class PlayerController : MonoBehaviour
     {
         animatorController.SetAnimatorParameter(rb.velocity, _isGrounded);
     }
-    /*private void OnTriggerEnter2D(Collider2D collision)
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.TryGetComponent(out Collectibles collectible))
         {
@@ -101,8 +123,16 @@ public class PlayerController : MonoBehaviour
                     break;
             }
 
-            Destroy(collectible.gameObject);*/
+            collision.gameObject.SetActive(false);
         }
 
-
-
+        if (collision.CompareTag("Finish"))
+        {
+            GameManager.instance.LoadNextLevel();
+        }
+        if (playerCollider.IsTouchingLayers(LayerMask.GetMask("Hazard")))
+        {
+            TakeDamage();
+        }
+    }
+}

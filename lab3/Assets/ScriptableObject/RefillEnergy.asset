@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collectibleType: 2
   sprite: {fileID: 1008562001, guid: e4cf1e6cc738caf408ebd98517ada700, type: 3}
-  outlineSprite: {fileID: -1743663708, guid: e4cf1e6cc738caf408ebd98517ada700, type: 3}
+  outlineSprite: {fileID: -254167169, guid: e4cf1e6cc738caf408ebd98517ada700, type: 3}
   respawnable: 1

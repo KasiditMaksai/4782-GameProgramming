@@ -1,31 +1,37 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class Collectibles : MonoBehaviour
 {
    [SerializeField] private SoCollectible collectibleObject;
+   [SerializeField] private SpriteRenderer spriteRenderer;
+   [SerializeField] private float delay = 4f;
    
    public CollectibleType color;
 
-   void Start()
+   private void Start()
    {
-      Debug.Log(collectibleObject.GetCollectibleItem());
       if (TryGetComponent<CollectibleRandom>(out CollectibleRandom collectibleRandomize))
       {
          color = collectibleRandomize.color;
       }
    }
 
-   CollectibleType getColor()
+   private void OnTriggerEnter2D(Collider2D collision)
    {
-      return this.color;
+      if (collision.CompareTag("Player"))
+      {
+         spriteRenderer.enabled = false;
+         Debug.Log(collectibleObject.GetCollectibleItem());
+         StartCoroutine(Respawn());
+      }
    }
 
-   void setColor(CollectibleType color)
+   public IEnumerator Respawn()
    {
-      this.color = color;
+      yield return new WaitForSeconds(delay);
+      spriteRenderer.enabled = true;
    }
+   
 }

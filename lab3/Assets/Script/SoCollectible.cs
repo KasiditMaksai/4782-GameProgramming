@@ -9,6 +9,7 @@ public class SoCollectible : ScriptableObject
     [SerializeField] private Sprite sprite;
     [SerializeField] private Sprite outlineSprite;
     [SerializeField] private bool respawnable;
+    
     public Sprite GetSprite() => sprite;
     public CollectibleItem GetCollectibleItem() => collectibleType;
     public Sprite GetOutlineSprite() => outlineSprite;
