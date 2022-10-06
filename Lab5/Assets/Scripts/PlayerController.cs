@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
     {
         _gameManager.ProcessPlayerDeath();
         //playSound.Play();
-        audioController.PlayDeathSound();
+        //audioController.PlayDeathSound();
     }
     
     #endregion

@@ -1,13 +1,22 @@
 using UnityEngine;
+using System.Collections;
 
 public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private PlayerController playerController;
+    [SerializeField] private PlayerAudioController audioController;
+    [SerializeField] private float waitTime = 0.03f;
 
     private Collider2D _playerCollider;
     private void Start()
     {
         _playerCollider = GetComponent<Collider2D>();
+    }
+    private IEnumerator waitDamage()
+    {
+        audioController.PlayDeathSound();
+        yield return new WaitForSeconds(waitTime);
+        playerController.TakeDamage();
     }
     
     private void OnTriggerEnter2D(Collider2D col)
@@ -38,8 +47,10 @@ public class PlayerCollision : MonoBehaviour
 
         if (_playerCollider.IsTouchingLayers(LayerMask.GetMask("Hazard")))
         {
-            playerController.TakeDamage();
+            audioController.PlayDeathSound();
+            StartCoroutine(waitDamage());
         }
+        
 
         #region Unused
 

@@ -9,7 +9,6 @@ public class SwapScenes : MonoBehaviour
         {
             if (SceneManager.GetActiveScene().name == "Main menu")
                 BGSound.instance.GetComponent<AudioSource>().Pause();
-            //BGmusic.instance.GetComponent<AudioSource>().Play();
         }
     }
 
