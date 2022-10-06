@@ -7,7 +7,6 @@ public class GameManager : MonoBehaviour
     // Simple singleton script. This is the easiest way to create and understand a singleton script.
     [SerializeField] private LifeDisplay displayPlayerlife;
     [SerializeField] private int life = 3;
-    [SerializeField] private PlayerAudioController audioController;
 
     private void Awake()
     {
