@@ -13800,7 +13800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22534657, y: -0.87000024, z: -10}
+  m_LocalPosition: {x: -0.22918463, y: -0.87000024, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -14523,6 +14523,10 @@ PrefabInstance:
       propertyPath: respawnAudioClips
       value: 
       objectReference: {fileID: 11400000, guid: 5f34888f684b12941bf023b2c86d6f4d, type: 2}
+    - target: {fileID: 3082085631428350933, guid: c490658654f0f434ab765746ac72c910, type: 3}
+      propertyPath: m_audioClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 2cb6073ce74ae274eb0dab09212c5096, type: 3}
     - target: {fileID: 8807623583782796292, guid: c490658654f0f434ab765746ac72c910, type: 3}
       propertyPath: m_Name
       value: Player
@@ -14571,6 +14575,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8807623583782796307, guid: c490658654f0f434ab765746ac72c910, type: 3}
+      propertyPath: audioController
+      value: 
+      objectReference: {fileID: 1156908891}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c490658654f0f434ab765746ac72c910, type: 3}
 --- !u!4 &1773615020 stripped
@@ -14740,7 +14748,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2094049902}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.22534657, y: -0.87000024, z: -10}
+  m_LocalPosition: {x: -0.22918463, y: -0.87000024, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
