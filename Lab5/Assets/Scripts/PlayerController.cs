@@ -142,11 +142,12 @@ public class PlayerController : MonoBehaviour
         _canDoubleJump = true;
         audioController.PlayPickSound();
     }
-    public AudioSource playSound;
+    //public AudioSource playSound;
     public void TakeDamage()
     {
-        playSound.Play();
         _gameManager.ProcessPlayerDeath();
+        //playSound.Play();
+        audioController.PlayDeathSound();
     }
     
     #endregion

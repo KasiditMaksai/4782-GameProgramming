@@ -5,7 +5,6 @@ public class PlayerCollision : MonoBehaviour
     [SerializeField] private PlayerController playerController;
 
     private Collider2D _playerCollider;
-    public AudioSource playSound;
     private void Start()
     {
         _playerCollider = GetComponent<Collider2D>();
@@ -39,7 +38,6 @@ public class PlayerCollision : MonoBehaviour
 
         if (_playerCollider.IsTouchingLayers(LayerMask.GetMask("Hazard")))
         {
-            playSound.Play();
             playerController.TakeDamage();
         }
 
