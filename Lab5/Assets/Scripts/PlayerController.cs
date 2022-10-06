@@ -168,6 +168,14 @@ public class PlayerController : MonoBehaviour
         TryJumping();
         ;
     }
+    private void OnQuit(InputValue value)
+    {
+        if (value.isPressed)
+        {
+            _gameManager = FindObjectOfType<GameManager>();
+            _gameManager.LoadMenu();
+        }
+    }
     
     #endregion
 
